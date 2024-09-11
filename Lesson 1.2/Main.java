@@ -4,8 +4,16 @@ public class Main {
         boolean LIKESPENGUINS = true;
         double PAYCHECK = 338.36;
         int WEEKS = 6;
-        double moneyTotal = PAYCHECK * WEEKS;
-        String intro = "My name is " + NAME + ".\nThe statement I like penguins is: " + LIKESPENGUINS + "\nThis summer I worked " + WEEKS + " earning $" + PAYCHECK + "/week earning me a total of $" + moneyTotal;
-        System.out.println(intro);
+        final double moneyTotal = PAYCHECK * WEEKS;
+        System.out.print("My name is ");
+        System.out.println(NAME);
+        System.out.print("The statement I like penguins is: ");
+        System.out.println(LIKESPENGUINS);
+        System.out.print("This summer I worked ");
+        System.out.print(WEEKS);
+        System.out.print(" weeks earning $");
+        System.out.print(PAYCHECK);
+        System.out.print("/week earning me a total of $");
+        System.out.println(moneyTotal);
     }
 }
