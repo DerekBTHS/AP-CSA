@@ -1,0 +1,69 @@
+body {
+    background-color: #001021;
+}
+
+.neon-box {
+    position: relative;
+    margin: 2rem auto;
+    padding: 2rem 4rem;
+    width: fit-content;
+    background-color: transparent;
+    border: 0.5rem solid #007bff; /* Neon sign bar at the top */
+    border-radius: 1rem;
+
+    box-shadow: inset 0 0 20px #007bff,
+        /* Inner glow from the container */ 0 0 10px #007bff, 0 0 20px #007bff,
+        0 0 30px #007bff;
+    text-align: center;
+}
+
+.neon-box::before,
+.neon-box::after {
+    content: "";
+    position: absolute;
+    top: -2.5rem; /* Distance from the top of the container */
+    width: 1rem; /* Width of the string */
+    height: 2rem; /* Length of the string */
+    background-color: #007bff;
+    box-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff;
+}
+
+.neon-box::before {
+    left: 10%;
+}
+
+.neon-box::after {
+    right: 10%;
+}
+
+.date-container,
+.cycle-container {
+    margin: 2rem auto;
+    text-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff, 0 0 40px #007bff,
+        0 0 50px #007bff, 0 0 100px #007bff;
+}
+
+.date,
+.cycle,
+.clock {
+    color: white;
+    font-weight: bold;
+    font-family: monospace, sans-seriff;
+    text-align: center;
+}
+
+.date {
+    margin: 0.5rem;
+    font-size: 2.5rem;
+}
+
+.cycle {
+    font-size: 1.5rem;
+}
+
+.clock {
+    margin: 10rem;
+    font-size: 6rem;
+    text-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff, 0 0 40px #007bff,
+        0 0 50px #007bff, 0 0 100px #007bff;
+}
