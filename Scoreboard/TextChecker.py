@@ -7,7 +7,6 @@ lines = file.readlines()
 file.close()
 
 wins = {}
-ties = 0
 
 # simulate each game in text file
 for line in lines:
