@@ -14,7 +14,7 @@ for line in lines:
     team2 = line.split(" ")[1]
     inputs = list(line.split(" ")[2:-1])
     game = Scoreboard(team1, team2, inputs)
-    if game.winner() in wins and game.winner():
+    if game.winner() in wins:
         wins.update({game.winner() : wins.get(game.winner()) + 1})
     else:
         wins.update({game.winner() : 1})
