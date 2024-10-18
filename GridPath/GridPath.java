@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class GridPath {
 
     /** Initialized in the constructor with distinct values that never change */
