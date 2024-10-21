@@ -9,7 +9,12 @@ public class Main {
         System.out.println(a2.isWordChain());
 
         // Test cases as shown in part b
-        WordChecker b = new WordChecker(new ArrayList<String>(Arrays.asList("catch", "bobcat", "catchacat", "cat", "at")));
+        WordChecker b = new WordChecker();
+        b.listAdd("catch");
+        b.listAdd("bobcat");
+        b.listAdd("catchacat");
+        b.listAdd("cat");
+        b.listAdd("at");
         System.out.println(b.createList("cat"));
         System.out.println(b.createList("catch"));
         System.out.println(b.createList("dog"));

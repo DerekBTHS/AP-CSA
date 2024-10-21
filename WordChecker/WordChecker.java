@@ -9,6 +9,14 @@ public class WordChecker {
         wordList = words;
     }
 
+    public WordChecker() {
+        wordList = new ArrayList<String>();
+    }
+
+    public void listAdd(String word) {
+        wordList.add(word);
+    }
+
     /**
      * Returns true if each element of wordList (except the first) contains the
      * previous
