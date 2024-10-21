@@ -7,6 +7,17 @@ public class GridPath {
         grid = array;
     }
     
+    public String toString() {
+        String output = "";
+        for (int[] row : grid) {
+            for (int item : row) {
+                output += item + " ";
+            }
+            output += "\n";
+        }
+        return output;
+    }
+
     /**
     * Returns the Location representing a neighbor of the grid element at row and col,
     * as described in part (a)
