@@ -81,8 +81,7 @@ const GetCycleDay = () => {
     if (loading) {
         return (
             <div className="cycle-container">
-                <div className="cycle">Loading...</div> // Show loading indicator while data is being
-                fetched
+                <div className="cycle">Loading...</div>
             </div>
         );
     }

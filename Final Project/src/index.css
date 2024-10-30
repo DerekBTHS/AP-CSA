@@ -1,43 +1,32 @@
 body {
-    background-color: #001021;
+    background-image: url("/src/assets/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .neon-box {
     position: relative;
     margin: 2rem auto;
-    padding: 2rem 4rem;
+    padding: 0.25rem 2rem;
     width: fit-content;
     background-color: transparent;
-    border: 0.5rem solid #007bff; /* Neon sign bar at the top */
+    border: 0.5rem solid #007bff;
     border-radius: 1rem;
 
-    box-shadow: inset 0 0 20px #007bff,
-        /* Inner glow from the container */ 0 0 10px #007bff, 0 0 20px #007bff,
+    box-shadow: inset 0 0 20px #007bff, 0 0 10px #007bff, 0 0 20px #007bff,
         0 0 30px #007bff;
     text-align: center;
 }
 
-.neon-box::before,
-.neon-box::after {
-    content: "";
-    position: absolute;
-    top: -2.5rem; /* Distance from the top of the container */
-    width: 1rem; /* Width of the string */
-    height: 2rem; /* Length of the string */
-    background-color: #007bff;
-    box-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff;
-}
-
-.neon-box::before {
-    left: 10%;
-}
-
-.neon-box::after {
-    right: 10%;
-}
-
 .date-container,
-.cycle-container {
+.cycle-container,
+.next-alarm {
     margin: 2rem auto;
     text-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff, 0 0 40px #007bff,
         0 0 50px #007bff, 0 0 100px #007bff;
@@ -45,7 +34,8 @@ body {
 
 .date,
 .cycle,
-.clock {
+.clock,
+.next-alarm {
     color: white;
     font-weight: bold;
     font-family: monospace, sans-seriff;
@@ -62,8 +52,34 @@ body {
 }
 
 .clock {
-    margin: 10rem;
+    margin: 4rem;
     font-size: 6rem;
     text-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff, 0 0 40px #007bff,
         0 0 50px #007bff, 0 0 100px #007bff;
+}
+
+.next-alarm {
+    position: absolute;
+    bottom: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.alarm-container {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    background-color: #007bff;
+    max-width: 4rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: inset 0 0 20px #007bff, 0 0 10px #007bff, 0 0 20px #007bff,
+        0 0 30px #007bff;
+    text-align: center;
+}
+.alarm-icon {
+    max-width: 2.5rem;
 }
