@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Relativity Calculator</title>
+    <link rel="icon" href="src/rocket.png">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Length</a>
+        <a href="time.html">Time</a>
+        <a href="credits.html">Credits</a>
+    </nav>
+    <label>Velocity: </label>
+    <input type="number" id="velocity" min="0" max="1" step="any"> c <br>
+    <label>Propper Time: </label>
+    <input type="number" id="propperTime" min="0"> s <br>
+    <label>Time: </label>
+    <input type="number" id="time" min="0"> s <br>
+    <button id="submit">Submit</button>
+    <button id="clear">Clear</button>
+    <script>
+        let velocity;
+        let propperTime;
+        let time;
+
+        const c = 300_000_000;
+        document.getElementById("submit").onclick = function() {
+            velocity = document.getElementById("velocity").value;
+            propperTime = document.getElementById("propperTime").value;
+            time = document.getElementById("time").value;
+            if (velocity != "" && propperTime != "") {
+                document.getElementById("time").value = propperTime / Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
+            } else if (velocity != "" && time != "") {
+                document.getElementById("propperTime").value = time * Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
+            } else {
+                document.getElementById("velocity").value = Math.sqrt((1 - Math.pow(propperTime / time, 2)) * Math.pow(c, 2)) / c;
+            }
+        };
+
+        document.getElementById("clear").onclick = function() {
+            velocity = document.getElementById("velocity").value;
+            propperTime = document.getElementById("propperTime").value;
+            time = document.getElementById("time").value;
+            document.getElementById("time").value = "";
+            document.getElementById("propperTime").value = "";
+            document.getElementById("velocity").value = "";
+        };
+    </script>
+</body>
+</html>
