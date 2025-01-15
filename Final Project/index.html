@@ -12,41 +12,75 @@
         <a href="time.html">Time</a>
         <a href="credits.html">Credits</a>
     </nav>
-    <label>Velocity: </label>
+    <label for="velocity">Velocity: </label>
     <input type="number" id="velocity" min="0" max="1" step="any"> c <br>
-    <label>Propper Length: </label>
+    <label for="propperLength">Propper Length: </label>
     <input type="number" id="propperLength" min="0"> m <br>
-    <label>Length: </label>
+    <label for="length">Length: </label>
     <input type="number" id="length" min="0"> m <br>
-    <button id="submit">Submit</button>
-    <button id="clear">Clear</button>
     <script>
-        let velocity;
-        let propperLength;
-        let length;
-
-        const c = 300_000_000;
-        document.getElementById("submit").onclick = function() {
-            velocity = document.getElementById("velocity").value;
-            propperLength = document.getElementById("propperLength").value;
-            length = document.getElementById("length").value;
-            if (velocity != "" && propperLength != "") {
-                document.getElementById("length").value = propperLength * Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
-            } else if (velocity != "" && length != "") {
-                document.getElementById("propperLength").value = length / Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
-            } else {
-                document.getElementById("velocity").value = Math.sqrt((1 - Math.pow(length / propperLength, 2)) * Math.pow(c, 2)) / c;
+        class Queue {
+            constructor() {
+                this.front = null;
+                this.back = null;
             }
+
+            enqueue(item) {
+                if (this.back != item) {
+                    this.front = this.back;
+                    this.back = item;
+                }
+            }
+
+            printQueue() {
+                return "{" + this.front + ", " + this.back +"}";
+            }
+
+            getFront() {
+                return this.front;
+            }
+
+            getBack() {
+                return this.back;
+            }
+        }
+
+        function calculate(front, back) {
+            let hasVelocity;
+            let hasPropperLength;
+            let hasLength;
+            let velocity = document.getElementById("velocity").value;
+            let propperLength = document.getElementById("propperLength").value;
+            let length = document.getElementById("length").value;
+            const c = 300_000_000;
+
+            if (front == "velocity" || back == "velocity") {
+                hasVelocity = true;
+            };
+            if (front == "propperLength" || back == "propperLength") {
+                hasPropperLength = true;
+            };
+            if (front == "length" || back == "length") {
+                hasLength = true;
+            };
+
+            if (hasVelocity && hasPropperLength) {
+                document.getElementById("length").value = propperLength * Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
+            } else if (hasVelocity && hasLength) {
+                document.getElementById("propperLength").value = length / Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
+            } else if (hasPropperLength && hasLength){
+                document.getElementById("velocity").value = Math.sqrt((1 - Math.pow(length / propperLength, 2)) * Math.pow(c, 2)) / c;
+            };
         };
-        
-        document.getElementById("clear").onclick = function() {
-            velocity = document.getElementById("velocity").value;
-            propperLength = document.getElementById("propperLength").value;
-            length = document.getElementById("length").value;
-            document.getElementById("length").value = "";
-            document.getElementById("propperLength").value = "";
-            document.getElementById("velocity").value = "";
-        };
+
+        const queue = new Queue;
+        const inputs = document.querySelectorAll('input').forEach(item => {
+            item.addEventListener('input', event => {
+                queue.enqueue(item.id);
+                console.log(queue.printQueue());
+                calculate(queue.getFront(), queue.getBack());
+            })
+        });
     </script>
 </body>
 </html>
