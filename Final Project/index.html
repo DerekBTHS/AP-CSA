@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Special Relativity Calculator</title>
     <link rel="icon" href="src/rocket.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav>
@@ -12,12 +13,20 @@
         <a href="time.html">Time</a>
         <a href="credits.html">Credits</a>
     </nav>
-    <label for="velocity">Velocity: </label>
-    <input type="number" id="velocity" min="0" max="1" step="any"> c <br>
-    <label for="propperLength">Propper Length: </label>
-    <input type="number" id="propperLength" min="0"> m <br>
-    <label for="length">Length: </label>
-    <input type="number" id="length" min="0"> m <br>
+    <div id="Container">
+        <div class="input-group">
+            <label for="velocity">Velocity: </label>
+            <input type="number" id="velocity" min="0" max="1" step="any"> c <br>
+        </div>
+        <div class="input-group">
+            <label for="propperLength">Propper Length: </label>
+            <input type="number" id="propperLength" min="0"> m <br>
+        </div>
+        <div class="input-group">
+            <label for="length">Length: </label>
+            <input type="number" id="length" min="0"> m <br>
+        </div>
+    </div>
     <script>
         class Queue {
             constructor() {
