@@ -1,95 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Relativity Calculator</title>
-    <link rel="icon" href="src/rocket.png">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <nav>
-        <a href="index.html">Length</a>
-        <a href="time.html">Time</a>
-        <a href="credits.html">Credits</a>
-    </nav>
-    <div id="Container">
-        <div class="input-group">
-            <label for="velocity">Velocity: </label>
-            <input type="number" id="velocity" min="0" max="1" step="any"> c <br>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Special Relativity Calculator</title>
+        <link rel="icon" href="src/rocket.png" />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <nav>
+            <a href="index.html">Length</a>
+            <a href="time.html">Time</a>
+            <a href="credits.html">Credits</a>
+        </nav>
+        <div id="Container">
+            <div class="input-group">
+                <label for="velocity">Velocity: </label>
+                <input type="number" id="velocity" min="0" max="1" step="any" /> c <br />
+            </div>
+            <div class="input-group">
+                <label for="propperLength">Propper Length: </label>
+                <input type="number" id="propperLength" min="0" /> m <br />
+            </div>
+            <div class="input-group">
+                <label for="length">Length: </label>
+                <input type="number" id="length" min="0" /> m <br />
+            </div>
         </div>
-        <div class="input-group">
-            <label for="propperLength">Propper Length: </label>
-            <input type="number" id="propperLength" min="0"> m <br>
-        </div>
-        <div class="input-group">
-            <label for="length">Length: </label>
-            <input type="number" id="length" min="0"> m <br>
-        </div>
-    </div>
-    <script>
-        class Queue {
-            constructor() {
-                this.front = null;
-                this.back = null;
-            }
+        <script>
+            class Queue {
+                constructor() {
+                    this.front = null;
+                    this.back = null;
+                }
 
-            enqueue(item) {
-                if (this.back != item) {
-                    this.front = this.back;
-                    this.back = item;
+                enqueue(item) {
+                    if (this.back != item) {
+                        this.front = this.back;
+                        this.back = item;
+                    }
+                }
+
+                printQueue() {
+                    return "{" + this.front + ", " + this.back + "}";
+                }
+
+                getFront() {
+                    return this.front;
+                }
+
+                getBack() {
+                    return this.back;
                 }
             }
 
-            printQueue() {
-                return "{" + this.front + ", " + this.back +"}";
+            function calculate(front, back) {
+                let hasVelocity;
+                let hasPropperLength;
+                let hasLength;
+                let velocity = document.getElementById("velocity").value;
+                let propperLength = document.getElementById("propperLength").value;
+                let length = document.getElementById("length").value;
+                const c = 300_000_000;
+
+                if (front == "velocity" || back == "velocity") {
+                    hasVelocity = true;
+                }
+                if (front == "propperLength" || back == "propperLength") {
+                    hasPropperLength = true;
+                }
+                if (front == "length" || back == "length") {
+                    hasLength = true;
+                }
+
+                if (hasVelocity && hasPropperLength) {
+                    document.getElementById("length").value =
+                        propperLength *
+                        Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
+                } else if (hasVelocity && hasLength) {
+                    document.getElementById("propperLength").value =
+                        length /
+                        Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
+                } else if (hasPropperLength && hasLength) {
+                    document.getElementById("velocity").value =
+                        Math.sqrt(
+                            (1 - Math.pow(length / propperLength, 2)) * Math.pow(c, 2)
+                        ) / c;
+                }
             }
 
-            getFront() {
-                return this.front;
-            }
-
-            getBack() {
-                return this.back;
-            }
-        }
-
-        function calculate(front, back) {
-            let hasVelocity;
-            let hasPropperLength;
-            let hasLength;
-            let velocity = document.getElementById("velocity").value;
-            let propperLength = document.getElementById("propperLength").value;
-            let length = document.getElementById("length").value;
-            const c = 300_000_000;
-
-            if (front == "velocity" || back == "velocity") {
-                hasVelocity = true;
-            };
-            if (front == "propperLength" || back == "propperLength") {
-                hasPropperLength = true;
-            };
-            if (front == "length" || back == "length") {
-                hasLength = true;
-            };
-
-            if (hasVelocity && hasPropperLength) {
-                document.getElementById("length").value = propperLength * Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
-            } else if (hasVelocity && hasLength) {
-                document.getElementById("propperLength").value = length / Math.sqrt(1 - Math.pow(velocity * c, 2) / Math.pow(c, 2));
-            } else if (hasPropperLength && hasLength){
-                document.getElementById("velocity").value = Math.sqrt((1 - Math.pow(length / propperLength, 2)) * Math.pow(c, 2)) / c;
-            };
-        };
-
-        const queue = new Queue;
-        const inputs = document.querySelectorAll('input').forEach(item => {
-            item.addEventListener('input', event => {
-                queue.enqueue(item.id);
-                console.log(queue.printQueue());
-                calculate(queue.getFront(), queue.getBack());
-            })
-        });
-    </script>
-</body>
+            const queue = new Queue();
+            const inputs = document.querySelectorAll("input").forEach((item) => {
+                item.addEventListener("input", (event) => {
+                    queue.enqueue(item.id);
+                    console.log(queue.printQueue());
+                    calculate(queue.getFront(), queue.getBack());
+                });
+            });
+        </script>
+    </body>
 </html>
