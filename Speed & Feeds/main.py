@@ -126,17 +126,17 @@ def Calculate():
     if input("Is Carbide? (y/n): ") == "y":
         spindle *= 2
     if input("Is Countersinking? (y/n): ") == "y":
-        spindle *= 0.25
+        feed = spindle * 0.25
     if input("Is Counterboring? (y/n): ") == "y":
-        spindle *= 0.25
+        feed = spindle * 0.25
     if input("Is Plunging? (y/n): ") == "y":
-        spindle *= 0.5
+        feed = spindle * 0.5
     if operation == "1":
-        feed = spindle * materialFace[material] * teeth
+        feed *= materialFace[material] * teeth
     elif operation == "2":
-        feed = spindle * materialSide[material] * teeth
+        feed *= materialSide[material] * teeth
     elif operation == "3":
-        feed = spindle * materialEnd[material] * teeth
+        feed *= materialEnd[material] * teeth
     
     print(spindle)
     print(feed)
