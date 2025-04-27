@@ -41,13 +41,13 @@ class Robot {
         let x = Math.round(this.x);
         let y = Math.round(this.y);
         if (this.direction == 0) {
-            return ([maze[y + 1][x], maze[y][x + 1]]);
+            return [maze[y + 1][x], maze[y][x + 1]];
         } else if (this.direction == PI / 2) {
-            return ([maze[y][x + 1], maze[y - 1][x]]);
+            return [maze[y][x + 1], maze[y - 1][x]];
         } else if (this.direction == PI) {
-            return ([maze[y - 1][x], maze[y][x - 1]]);
-        } else if (this.direction == 3 * PI / 2) {
-            return ([maze[y][x - 1], maze[y + 1][x]]);
+            return [maze[y - 1][x], maze[y][x - 1]];
+        } else if (this.direction == (3 * PI) / 2) {
+            return [maze[y][x - 1], maze[y + 1][x]];
         }
     }
 
@@ -57,39 +57,31 @@ class Robot {
             this.moveForward();
             let walls = this.findWalls();
             if (walls[1] == 1) {
-                this.state = 1;
-            }
-        }
-        // state 1 - turn left until wall is found
-        else if (this.state == 1) {
-            this.turnLeft();
-            let walls = this.findWalls();
-            if (walls[0] == 1) {
                 this.state = 2;
             }
         }
-        // state 2 - move forward
-        else if (this.state == 2) {
+        // state 1 - move forward
+        else if (this.state == 1) {
             this.moveForward();
             let walls = this.findWalls();
             if (walls[0] == 1 && walls[1] == 1) {
-                this.state = 3;
+                this.state = 2;
             } else if (walls[0] == 0) {
-                this.state = 4;
+                this.state = 3;
             }
         }
-        // state 3 - turn left until no wall in front
-        else if (this.state == 3) {
+        // state 2 - turn left until no wall in front
+        else if (this.state == 2) {
             this.turnLeft();
             let walls = this.findWalls();
             if (walls[1] == 0) {
-                this.state = 2;
+                this.state = 1;
             }
         }
-        // state 4 - turn right
-        else if (this.state == 4) {
+        // state 3 - turn right
+        else if (this.state == 3) {
             this.turnRight();
-            this.state = 2;
+            this.state = 1;
         }
         console.log(this.state);
     }
