@@ -17,7 +17,7 @@ let r;
 
 function setup() {
   frameRate(15);
-  createCanvas(cellSize * mazeSize[0], cellSize * mazeSize[1]);
+  createCanvas(cellSize * mazeSize[0] + 300, cellSize * mazeSize[1]);
   r = new Robot(2, 2, PI / 2);
 }
 
@@ -28,6 +28,7 @@ function draw() {
   }
   drawBoard();
   r.draw();
+  r.console();
 }
 
 function drawBoard() {

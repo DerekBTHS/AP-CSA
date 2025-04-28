@@ -85,4 +85,17 @@ class Robot {
         }
         console.log(this.state);
     }
+
+    console() {
+        push();
+        stroke(0);
+        textSize(32);
+        fill(0);
+        text("Console", cellSize * mazeSize[0] + 10, 50);
+        text("State: " + this.state, cellSize * mazeSize[0] + 10, 100);
+        let walls = this.findWalls();
+        text("r: " + walls[0], cellSize * mazeSize[0] + 10, 150);
+        text("h: " + walls[1], cellSize * mazeSize[0] + 10, 200);
+        pop();
+    }
 }
