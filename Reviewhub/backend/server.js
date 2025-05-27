@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use("/api", productsRoutes);
 
-app.listen(PORT, () => {
+app.listen(8632, () => {
     connectDB();
-    console.log("Server started at http://localhost:" + PORT);
+    console.log("Server started at http://localhost:" + 8632);
 });
