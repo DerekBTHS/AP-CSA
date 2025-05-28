@@ -3,30 +3,29 @@ import useReviewStore from "../teachers/review";
 
 const HomePage = () => {
     const { fetchReviews } = useReviewStore();
-    const [searchQuery, setSearchQuery] = useState(""); // State for the search query
-    const [reviews, setReviews] = useState([]); // Initialize reviews as an empty array
-    const [hasSearched, setHasSearched] = useState(false); // Track if a search has been performed
-    const [averageRating, setAverageRating] = useState(0); // State for the average rating
+    const [searchQuery, setSearchQuery] = useState("");
+    const [reviews, setReviews] = useState([]);
+    const [hasSearched, setHasSearched] = useState(false);
+    const [averageRating, setAverageRating] = useState(0);
 
     const handleSearch = async (e) => {
-        e.preventDefault(); // Prevent the default form submission behavior
+        e.preventDefault();
 
         if (searchQuery.trim() === "") {
             alert("Please enter a teacher's name to search.");
             return;
         }
 
-        console.log("Searching for:", searchQuery); // Debugging: Log the search query
+        console.log("Searching for:", searchQuery);
 
         try {
-            const response = await fetchReviews(searchQuery); // Fetch reviews for the teacher
-            console.log("API response:", response); // Debugging: Log the API response
+            const response = await fetchReviews(searchQuery);
+            console.log("API response:", response);
 
             if (response && response.success) {
                 const fetchedReviews = response.data || [];
-                setReviews(fetchedReviews); // Set the reviews from the `data` property
+                setReviews(fetchedReviews);
 
-                // Calculate the average rating
                 const totalRating = fetchedReviews.reduce(
                     (sum, review) => sum + review.rating,
                     0
@@ -37,10 +36,10 @@ const HomePage = () => {
                         : 0;
                 setAverageRating(avgRating);
             } else {
-                setReviews([]); // Clear reviews if the response is not successful
-                setAverageRating(0); // Reset average rating
+                setReviews([]);
+                setAverageRating(0);
             }
-            setHasSearched(true); // Mark that a search has been performed
+            setHasSearched(true);
         } catch (error) {
             console.error("Error during search:", error);
             alert("An error occurred while searching. Please try again later.");
@@ -52,17 +51,14 @@ const HomePage = () => {
             <h1 style={styles.heading}>Welcome to ReviewHub</h1>
             <p style={styles.subheading}>Search for teacher reviews below:</p>
 
-            {/* Display Quote Before Search */}
             {!hasSearched && (
                 <p style={styles.quote}>"Not all teachers are created equal."</p>
             )}
 
-            {/* Display Average Rating */}
             {hasSearched && (
                 <p style={styles.averageRating}>Average Big Booms: {averageRating} / 5</p>
             )}
 
-            {/* Centered Search Bar */}
             <form onSubmit={handleSearch} style={styles.searchBarContainer}>
                 <input
                     type="text"
@@ -76,7 +72,6 @@ const HomePage = () => {
                 </button>
             </form>
 
-            {/* Display Reviews */}
             <div style={styles.reviewsContainer}>
                 {Array.isArray(reviews) && reviews.length > 0
                     ? reviews.map((review, index) => (
@@ -164,8 +159,8 @@ const styles = {
         margin: "0 auto",
     },
     reviewCard: {
-        width: "100%", // Make all reviews take the full width of the container
-        maxWidth: "600px", // Set a maximum width for each review
+        width: "100%",
+        maxWidth: "600px",
         padding: "24px",
         marginBottom: "16px",
         backgroundColor: "#ffffff",

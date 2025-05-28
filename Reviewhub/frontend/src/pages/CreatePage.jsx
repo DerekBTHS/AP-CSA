@@ -4,10 +4,10 @@ import useReviewStore from "../teachers/review";
 const CreatePage = () => {
     const [newReview, setNewReview] = useState({
         content: "",
-        rating: 1, // Default rating starts at 1
+        rating: 1,
     });
     const [teacherName, setTeacherName] = useState("");
-    const [toast, setToast] = useState({ message: "", type: "", visible: false }); // Toast state
+    const [toast, setToast] = useState({ message: "", type: "", visible: false });
 
     const { createReview } = useReviewStore();
 
@@ -18,7 +18,7 @@ const CreatePage = () => {
         if (success) {
             showToast("Review submitted successfully!", "success");
             setTeacherName("");
-            setNewReview({ content: "", rating: 1 }); // Reset form
+            setNewReview({ content: "", rating: 1 });
         } else {
             showToast(`Failed to submit review: ${message}`, "error");
         }
@@ -32,7 +32,7 @@ const CreatePage = () => {
         setToast({ message, type, visible: true });
         setTimeout(() => {
             setToast({ ...toast, visible: false });
-        }, 3000); // Hide toast after 3 seconds
+        }, 3000);
     };
 
     return (
@@ -82,11 +82,11 @@ const CreatePage = () => {
                                 style={{
                                     ...styles.boom,
                                     color:
-                                        newReview.rating >= boom ? "#FFD700" : "#7F95D1", // Bright gold for selected, muted blue for unselected
+                                        newReview.rating >= boom ? "#FFD700" : "#7F95D1",
                                     textShadow:
                                         newReview.rating >= boom
                                             ? "0 0 10px #FFD700"
-                                            : "none", // Add glow effect for selected
+                                            : "none",
                                 }}
                             >
                                 💥
@@ -151,14 +151,14 @@ const styles = {
     },
     booms: {
         display: "flex",
-        justifyContent: "center", // Center the booms horizontally
+        justifyContent: "center",
         gap: "10px",
         marginTop: "10px",
     },
     boom: {
-        fontSize: "3rem", // Make the booms larger
+        fontSize: "3rem",
         cursor: "pointer",
-        transition: "color 0.3s, text-shadow 0.3s", // Smooth transition for color and glow
+        transition: "color 0.3s, text-shadow 0.3s",
     },
     button: {
         padding: "10px 20px",
@@ -187,10 +187,10 @@ const styles = {
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     },
     toastSuccess: {
-        backgroundColor: "#4CAF50", // Green for success
+        backgroundColor: "#4CAF50",
     },
     toastError: {
-        backgroundColor: "#F44336", // Red for error
+        backgroundColor: "#F44336",
     },
 };
 
